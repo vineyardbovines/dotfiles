@@ -1,46 +1,46 @@
 # Main Colors
-# snazzy red: lightcoral
-# snazzy white: lavender
-# snazzy green: lime
-# snazzy yellow: moccasin
-# snazzy blue: deepskyblue
-# snazzy pink: hotpink
-# snazzy mediumaquamarine: mediumaquamarine
-unrecognized_file: lightcoral
-recognized_file: greenyellow
-dir: goldenrod
+unrecognized_file: 'coral'
+recognized_file:   'lightsteelblue'
+executable_file:   'darkseagreen'
+dir:              'steelblue'
 
 # Link
-dead_link: lightcoral
-link: turquoise
+dead_link: 'indianred'
+link:      'lightseagreen'
+
+# Special Files
+socket:    'mediumturquoise'
+blockdev:  'mediumturquoise'
+chardev:   'mediumturquoise'
 
 # Access Modes
-write: turquoise
-read: greenyellow
-exec: goldenrod
-no_access: lightcoral
+write:     'mediumpurple'
+read:      'darkseagreen'
+exec:      'coral'
+no_access: 'darkred'
 
 # Age
-day_old: greenyellow
-hour_old: turquoise
-no_modifier: lightcoral
+day_old:     'mediumturquoise'
+hour_old:    'darkseagreen'
+no_modifier: 'slategray'
 
 # File Size
-file_large: orange
-file_medium: brightgold
-file_small: peachpuff
+file_large:  'darkorange'
+file_medium: 'darkgoldenrod'
+file_small:  'wheat'
 
 # Random
-report: white
-user: moccasin
-tree: turquoise
-empty: goldenrod
-error: lightcoral
-normal: darkkhaki
+report: 'lightsteelblue'
+user:   'mediumpurple'
+tree:   'steelblue'
+empty:  'darkgoldenrod'
+error:  'darkred'
+normal: 'slategray'
+inode:  'mediumpurple'
 
 # Git
-addition: lime
-modification: lightsteelblue
-deletion: lightcoral
-untracked: moccasin
-unchanged: lavender
+addition:     'darkseagreen'
+modification: 'darkgoldenrod'
+deletion:     'coral'
+untracked:    'darkorange'
+unchanged:    'mediumturquoise'

@@ -1,106 +1,86 @@
-#!/bin/bash
+##!/bin/bash
 
-install_brew() {
-    if ! command -v "brew" &> /dev/null; then
-        printf "Homebrew not found, installing."
-        # install homebrew
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        # set path
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-    fi
-
-    printf "Installing homebrew packages..."
-    brew bundle
+quiet() {
+    "$@" > /dev/null 2>&1
 }
 
-create_dirs() {
-    declare -a dirs=(
-        "$HOME/Downloads/torrents"
-        "$HOME/Desktop/screenshots"
-        "$HOME/dev"
-    )
+#get sudo password
+sudo -v
+while true; do
+  sudo -n true
+  sleep 60
+  kill -0 "$$" || exit
+done 2>/dev/null &
 
-    for i in "${dirs[@]}"; do
-        mkdir "$i"
-    done
-}
+#xcode-select
+printf "Checking xcode-select\n"
+quiet xcode-select --install
 
-build_xcode() {
-    if ! xcode-select --print-path &> /dev/null; then
-        xcode-select --install &> /dev/null
+#homebrew
+if ! command -v "brew" &>/dev/null; then
+    printf "Installing Homebrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    quiet eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-        until xcode-select --print-path &> /dev/null; do
-            sleep 5
-        done
+#xcode
+printf "Installing Xcode\n"
+quiet brew install xcodesorg/made/xcodes
+quiet xcodes install --latest --no-superuser
+quiet sudo xcode-select -switch /Applications/Xcode.app
+quiet sudo xcodebuild -license accept
 
-        sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
+#homebrew packages
+printf "Installing Homebrew packages\n"
+quiet brew bundle
 
-        sudo xcodebuild -license
-    fi
-}
+#app store
+printf "Installing App Store apps\n"
+quiet mas install 1509590766 Mutekey
+quiet mas install 1545870783 System Color Picker
+quiet mas install 1450874784 Transporter
 
-install_app_store_apps() {
-    mas install 497799835 # Xcode
-    mas install 1509590766 # Mutekey
-    mas install 1545870783 # System Color Picker
-    mas install 1450874784 # Transporter
-    mas install 1351639930 # Gifski
-}
-
-printf "🗄  Creating directories\n"
-create_dirs
-
-printf "🛠  Installing Xcode Command Line Tools\n"
-build_xcode
-
-printf "🍺  Installing Homebrew packages\n"
-install_brew
-
-printf "🛍️  Installing Mac App Store apps\n"
-install_app_store_apps
-printf "🛠  Set Xcode path\n"
-sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
-
-printf "💻  Set macOS preferences\n"
-./macos/.macos
-
-printf "🌈  Configure Ruby\n"
-ruby-install ruby-2.7.4 1>/dev/null
-source /opt/homebrew/opt/chruby/share/chruby.sh
-source /opt/homebrew/opt/chruby/share/auto.sh
-chruby ruby-2.7.4 1>/dev/null
-# disable downloading documentation
+#ruby
+printf "Installing Ruby\n"
+source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 echo "gem: --no-document" >> ~/.gemrc
-gem update --system 1>/dev/null
-gem install bundler 1>/dev/null
-# install colorls
-gem install clocale colorls 1>/dev/null
+quiet gem update --system
+quiet gem install bundler
+quiet gem install clocale colorls
 
-printf "📦  Configure Node\n"
-# install n for version management
-npm install -g n 1>/dev/null
-# make cache folder (if missing) and take ownership
-sudo mkdir -p /usr/local/n
-sudo chown -R $(whoami) /usr/local/n
-# take ownership of Node.js install destination folders
-sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
-# install and use node lts
-n lts
-# install pnpm
-npm install -g pnpm
+#node / npm
+printf "Installing Node and n"
+quiet npm install -g n
+quiet sudo mkdir -p /usr/local/n
+quiet sudo chown -R $(whoami) /usr/local/n
+quiet sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
+quiet n lts
 
-printf "🐍  Configure Python\n"
-# setup pyenv / global python to 3.10.x
-pyenv install 3.12 1>/dev/null
-pyenv global 3.12 1>/dev/null
-# dont set conda clutter in zshrc
-conda config --set auto_activate_base false
+#pnpm
+printf "Installing pnpm\n"
+quiet curl -fsSL https://get.pnpm.io/install.sh | sh -
 
-printf "👽  Installing vim-plug\n"
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+#bun
+printf "Installing bun\n"
+quiet curl -fsSL https://bun.sh/install | bash
+
+#rust
+printf "Installing rust\n"
+quiet curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+#vim
+printf "Installing vim plugins\n"
+quiet url -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-printf "🐗  Stow dotfiles\n"
-stow alacritty colorls fzf git nvim skhd starship tmux vim yabai z zsh
+#zplug
+printf "Installing zplug\n"
+quiet curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
-printf "✨  Done!\n"
+#starship
+printf "Installing starship\n"
+quiet curl -sS https://starship.rs/install.sh | sh
+
+#stow
+printf "Stowing dotfiles\n"
+quiet stow alacritty colorls fzf git nvim skhd starship tmux vim yabai z zsh

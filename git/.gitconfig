@@ -27,8 +27,8 @@
 [pager]
   branch = false
 [user]
-	name = gretzky
-	email = sfed617@gmail.com
+	name = vineyardbovines
+	email = spencerfpope@gmail.com
 [pull]
 	rebase = false
 [init]

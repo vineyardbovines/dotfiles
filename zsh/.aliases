@@ -257,7 +257,8 @@ alias dots="cd ~/dotfiles"
 alias dotfiles="cd ~/dotfiles"
 
 # python
-alias pip="pip3"
+alias python=python3.10
+alias pip=pip3.10
 
 # make a pdf
 alias mergepdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py"

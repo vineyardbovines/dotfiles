@@ -103,3 +103,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # ruby
 export GEM_HOME="$HOME/.gem"
 export PATH="$GEM_HOME/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/pope/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/pope/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/pope/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/pope/google-cloud-sdk/completion.zsh.inc'; fi

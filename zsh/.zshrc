@@ -14,7 +14,6 @@ zplug "plugins/bun", from:oh-my-zsh
 zplug "plugins/chruby", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/git-auto-fetch", from:oh-my-zsh
 zplug "plugins/starship", from:oh-my-zsh
 zplug "plugins/safe-paste", from:oh-my-zsh
 zplug "zsh-users/zsh-autosuggestions"

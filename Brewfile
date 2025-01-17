@@ -94,6 +94,7 @@ brew "mas"
 brew "obsidian"
 brew "zlib"
 brew "youtube-dl"
+brew "jordanbaird-ice"
 
 ###
 # Cask
@@ -102,7 +103,6 @@ cask "1password"
 cask "alacritty"
 cask "alfred"
 cask "android-studio"
-cask "dozer"
 cask "expo-orbit"
 cask "firefox"
 cask "font-hack"

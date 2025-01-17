@@ -291,7 +291,7 @@ alias stfu="osascript -e 'set volume output muted true'"
 alias xcodepurge="rm -rf ~/Library/Developer/Xcode/DerivedData"
 
 # start tabby server
-alias tabbyserve="tabby serve --device metal --model StarCoder-1B --chat-model Qwen2-1.5B-Instruct"
+alias tabbyserve="tabby serve --device metal --model StarCoder-1B --chat-model Qwen2-1.5B-Instruct --port 6969"
 
 # use gitignore.io cmd line tool
 gi() {

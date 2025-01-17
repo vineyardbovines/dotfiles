@@ -108,3 +108,8 @@ if [ -f '/Users/pope/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/pope/googl
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/pope/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/pope/google-cloud-sdk/completion.zsh.inc'; fi
+
+# open tmux
+if [ -z "$TMUX" ]; then
+    tmux attach || tmux new-session -s main
+fi

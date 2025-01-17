@@ -375,14 +375,6 @@ gifify() {
 	fi
 }
 
-# 🗑
-emptytrash() {
-	print_header "🗑  Emptying trashes..."
-	sudo rm -rfv /Volumes/*/.Trashes 1>/dev/null
-	rm -rfv ~/.Trash/* 1>/dev/null
-	sudo rm -v /private/var/vm/sleepimage 1>/dev/null
-}
-
 pyenv() {
   local command
   command="${1:-}"

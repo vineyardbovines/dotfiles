@@ -1,0 +1,22 @@
+{
+  "editor.detectIndentation": false,
+  "editorconfig.generateAuto": false,
+  "editor.fontSize": 14,
+  "editor.fontFamily": "'Hack Nerd Font', Menlo, Monaco, 'Courier New', monospace",
+  "editor.formatOnSave": true,
+  "editor.indentSize": "tabSize",
+  "editor.linkedEditing": true,
+  "editor.tabSize": 2,
+  "explorer.confirmDelete": false,
+  "git.autofetch": true,
+  "window.zoomLevel": 0.7,
+  "workbench.colorTheme": "Ayu Mirage",
+  "workbench.productIconTheme": "a-file-icon-vscode-product-icon-theme",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none",
+  "workbench.editor.empty.hint": "hidden",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  }
+}

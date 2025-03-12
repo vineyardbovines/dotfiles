@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
-# # use `hub` as git wrapper
-# # http://defunkt.github.com/hub/
-# hub_path=$(which hub)
-# if (($ + commands[hub])); then
-# 	alias git=$hub_path
-# fi
+###
+# git
+###
 
 alias g="git"
 
@@ -89,6 +86,10 @@ alias gbi="git browse -- issues"
 
 # pull-request
 alias gpr="git pull-request"
+
+###
+# ls
+###
 
 # better ls
 alias ls="echo; colorls -A --group-directories-first"
@@ -183,6 +184,10 @@ alias sed="gsed"
 # which
 alias which="gwhich"
 
+###
+# node
+###
+
 # npm
 alias nin="npm init"
 alias ni="npm i"
@@ -227,7 +232,10 @@ alias pna="pnpm add"
 alias pnr="pnpm run"
 alias pni="pnpm install"
 
+###
 # shortcuts
+###
+
 alias md="mkdir"
 alias t="touch"
 alias x="exit"
@@ -289,9 +297,6 @@ alias stfu="osascript -e 'set volume output muted true'"
 
 # remove cached xcode build data
 alias xcodepurge="rm -rf ~/Library/Developer/Xcode/DerivedData"
-
-# start tabby server
-alias tabbyserve="tabby serve --device metal --model StarCoder-1B --chat-model Qwen2-1.5B-Instruct --port 6969"
 
 # use gitignore.io cmd line tool
 gi() {
@@ -357,22 +362,6 @@ up() {
 		done
 	fi
 	cd "${cdir}"
-}
-
-# animated gifs from any video
-# https://gist.github.com/SlexAxton/4989674
-gifify() {
-	if [[ -n "$1" ]]; then
-		if [[ $2 == '--good' ]]; then
-			ffmpeg -i "$1" -r 10 -vcodec png out-static-%05d.png
-			time convert -verbose +dither -layers Optimize -resize 900x900\> out-static*.png GIF:- | gifsicle --colors 128 --delay=5 --loop --optimize=3 --multifile - >"$1.gif"
-			rm out-static*.png
-		else
-			ffmpeg -i "$1" -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 >"$1.gif"
-		fi
-	else
-		echo "✋  proper usage: gifify <input_movie.mov>. You DO need to include extension."
-	fi
 }
 
 pyenv() {

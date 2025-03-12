@@ -6,7 +6,7 @@ if [[ -z "$LANG" ]]; then
 fi
 
 # set editors
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 export PAGER='less'
 

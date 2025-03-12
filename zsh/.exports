@@ -20,6 +20,8 @@ PATH=$PATH:/opt/homebrew/bin
 # configure ruby
 source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+export GEM_HOME="$HOME/.gem"
+export PATH="$GEM_HOME/bin:$PATH"
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8'
@@ -50,9 +52,6 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 # ripgrep
 export RIPGREP_CONFIG_PATH=$HOME/.rgrc
 
-# conda
-export PATH="/usr/local/miniconda3/bin:$PATH"
-
 # linux utils
 export PATH="/usr/local/opt/util-linux/bin:$PATH"
 export PATH="/usr/local/opt/util-linux/sbin:$PATH"
@@ -64,6 +63,10 @@ command pyenv rehash 2>/dev/null
 # pnpm
 export PNPM_HOME=$HOME/Library/pnpm
 export PATH=$PNPM_HOME:$PATH
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 # direnv
 eval "$(direnv hook zsh)"

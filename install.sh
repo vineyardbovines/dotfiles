@@ -74,18 +74,10 @@ quiet mas install 1558360383 # menu bar calendar
 # 6. ruby
 ###
 printf "setup ruby\n"
-quiet source $HOMEBREW_PREFIX/opt/chruby/share/chruby/chruby.sh
 echo "gem: --no-document" >> ~/.gemrc
-quiet ruby-install ruby
-# find the latest ruby version
-RUBY_DIRS=(~/.rubies/ruby-*)
-LATEST_RUBY="${RUBY_DIRS[${#RUBY_DIRS[@]}-1]}"
-LATEST_RUBY_VERSION=$(basename "$LATEST_RUBY" | sed 's/ruby-//')
-quiet chruby $LATEST_RUBY_VERSION
-quiet echo "ruby-$LATEST_RUBY_VERSION" > ~/.ruby-version
 quiet gem update --system
 quiet gem install bundler
-quiet gem install clocale colorls
+quiet gem install clocale colorls fastlane cocoapods
 
 ###
 # 7. node

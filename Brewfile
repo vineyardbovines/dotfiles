@@ -70,8 +70,7 @@ brew "postgresql"
 brew "sqlite"
 brew "supabase"
 brew "yarn"
-brew "chruby"
-brew "ruby-install"
+brew "ruby"
 
 # mobile
 brew "applesimutils"

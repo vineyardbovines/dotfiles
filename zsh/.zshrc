@@ -10,7 +10,6 @@ source ~/.zplug/init.zsh
 
 zplug "plugins/aliases", from:oh-my-zsh
 zplug "plugins/bun", from:oh-my-zsh
-zplug "plugins/chruby", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/starship", from:oh-my-zsh
@@ -29,3 +28,6 @@ source $HOME/dotfiles/zsh/.aliases
 if [ -z "$TMUX" ]; then
     tmux attach || tmux new-session -s main
 fi
+
+# bun completions
+[ -s "/Users/spencerpope/.bun/_bun" ] && source "/Users/spencerpope/.bun/_bun"

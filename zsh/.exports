@@ -17,14 +17,12 @@ export GPG_TTY=$(tty)
 # brew
 PATH=$PATH:/opt/homebrew/bin
 
-# configure ruby
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-export GEM_HOME="$HOME/.gem"
-export PATH="$GEM_HOME/bin:$PATH"
-
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8'
+
+# ruby
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="/opt/homebrew/lib/ruby/gems/3.4.0/bin:$PATH"
 
 # npm global
 export NPM_PACKAGES="/usr/local/npm_packages"

@@ -43,7 +43,7 @@ This expands to [run.sh](https://github.com/gretzky/dotfiles/blob/master/run.sh)
 
 ### Programming languages
 
-- Ruby with [chruby](https://github.com/postmodern/chruby)
+- Ruby using homebrew
 - Python with [pyenv](https://github.com/pyenv/pyenv) 
 - Node with [n](https://github.com/tj/n)
 

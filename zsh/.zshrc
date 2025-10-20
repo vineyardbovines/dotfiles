@@ -1,13 +1,9 @@
-source $HOME/dotfiles/zsh/.exports
+#!/bin/zsh
 
-# history
-HISTSIZE=50000
-SAVEHIST=10000
+source $HOME/dotfiles/zsh/exports.zsh
 
-eval "$(starship init zsh)"
-
+# plugins
 source ~/.zplug/init.zsh
-
 zplug "plugins/aliases", from:oh-my-zsh
 zplug "plugins/bun", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
@@ -19,15 +15,18 @@ zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "djui/alias-tips"
 zplug "vineyardbovines/auto-color-ls"
-
 zplug load
 
-source $HOME/dotfiles/zsh/.aliases
+autoload -U compinit
+compinit
+
+eval "$(direnv hook zsh)"
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
+
+source $HOME/dotfiles/zsh/alias.zsh
 
 # open tmux
 if [ -z "$TMUX" ]; then
     tmux attach || tmux new-session -s main
 fi
-
-# bun completions
-[ -s "/Users/spencerpope/.bun/_bun" ] && source "/Users/spencerpope/.bun/_bun"

@@ -1,13 +1,11 @@
 [general]
 
-import = [
-    "~/.config/alacritty/themes/ayu_mirage.toml"
-]
+import = ["~/.config/alacritty/themes/ayu_mirage.toml"]
 
 live_config_reload = true
 
 [terminal]
-shell = { program = "/bin/zsh", args = ["-l"]}
+shell = { program = "/bin/zsh", args = ["-l"] }
 
 [window]
 padding = { x = 20, y = 20 }
@@ -15,7 +13,7 @@ decorations = "buttonless"
 
 [scrolling]
 history = 10000
-multiplier = 3
+multiplier = 1
 
 [font]
 normal = { family = "Hack Nerd Font", style = "Regular" }

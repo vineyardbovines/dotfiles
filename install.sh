@@ -1,7 +1,6 @@
-##!/bin/bash
+#!/bin/bash
 
-# helper function to suppress output
-# with the exception of errors
+# helper function to suppress output with the exception of errors
 quiet() {
     if ! "$@" > /dev/null 2>&1; then
         printf "\033[31mSomething went wrong, see below\033[0m\n"
@@ -9,8 +8,8 @@ quiet() {
     fi
 }
 
-###
-# 0. get sudo password to use throughout the script
+
+# get sudo password for the lifetime of the script
 printf "your password is required\n"
 sleep 1
 sudo -v
@@ -20,15 +19,11 @@ while true; do
     kill -0 "$$" || exit
 done 2>/dev/null &
 
-###
-# 1. xcode command line tools
-###
+# xcode cli tools
 printf "installing xcode cli tools\n"
 quiet xcode-select --install
 
-###
-# 2. homebrew
-###
+# homebrew check
 if ! command -v "brew" &>/dev/null; then
     printf "installing homebrew\n"
     # install homebrew
@@ -37,94 +32,53 @@ if ! command -v "brew" &>/dev/null; then
     quiet eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-###
-# 3. xcode
-###
-printf "setup xcode\n"
-quiet brew install --cask xcodes
-quiet xcodes install --latest --no-superuser
-quiet sudo xcode-select -switch /Applications/Xcode.app
-quiet sudo xcodebuild -license accept
-
-###
-# 4. macos
-###
-printf "configure macos\n"
-./macos/.macos
-
-###
-# 4. install homebrew tools
-###
-printf "installing packages from brewfile\n"
+# homebrew packages
+printf "installing homebrew packages\n"
 quiet brew bundle
 
-###
-# 5. installing app store apps
-###
+# other apps
 printf "installing app store apps\n"
-quiet mas install 1509590766 # mutekey
-quiet mas install 1545870783 # system color picker
-quiet mas install 1450874784 # transporter
-quiet mas install 1569813296 # 1password safari extension
-quiet mas install 1502839586 # hand mirror
-quiet mas install 1206020918 # battery indicator
-quiet mas install 1558360383 # menu bar calendar
+APP_STORE_APPS=(
+    1509590766 # mutekey
+    1545870783 # system color picker
+    1450874784 # transporter
+    1502839586 # hand mirror
+    1206020918 # battery indicator
+    1558360383 # menu bar calendar
+)
+for app in "${APP_STORE_APPS[@]}"; do
+    quiet mas install $app
+done
 
-###
-# 6. ruby
-###
-printf "setup ruby\n"
-echo "gem: --no-document" >> ~/.gemrc
-quiet gem update --system
-quiet gem install bundler
-quiet gem install clocale colorls fastlane cocoapods
+# xcode
+printf "setup xcode\n"
+quiet xcodes install --latest --select --no-superuser --experimental-unxip
 
-###
-# 7. node
-###
-printf "setup node\n"
-quiet npm install -g npm
-quiet sudo mkdir -p /usr/local/n
-quiet sudo chown -R $(whoami) /usr/local/n
-quiet sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
-quiet n lts
-printf "installing pnpm\n"
-quiet curl -fsSL https://get.pnpm.io/install.sh | sh -
+# macos
+printf "configuring macos\n"
+quiet ./macos/set-defaults.sh
+quiet ./macos/set-login.sh
+
+# bun
 printf "installing bun\n"
 quiet curl -fsSL https://bun.sh/install | bash
 
-###
-# 8. rust
-###
-printf "setup rust\n"
-quiet curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# ruby
+printf "setup ruby\n"
+source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+quiet ruby-install ruby # latest stable
+echo "gem: --no-document" >> ~/.gemrc
+quiet gem install bundler clocale colorls fastlane cocoapods
 
-###
-# 9. vim
-###
-printf "setup vim\n"
+# vim
 quiet curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 quiet mkdir -p ~/.vim/undo
 quiet vim -E -s +PlugInstall +qall
 
-###
-# 10. zplug
-###
-printf "setup zsh\n"
-quiet curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-
-###
-# 11. starship
-###
-printf "install starship prompt\n"
-quiet curl -sS https://starship.rs/install.sh | sh
-
-###
-# 12. cursor
-###
+# cursor
 printf "setup cursor\n"
-if [ -f "extensions.txt" ]; then
+if [ -f "./cursor/extensions.txt" ]; then
   INSTALLED_EXTENSIONS=$(cursor --list-extensions)
   while read extension; do
     if ! echo "$INSTALLED_EXTENSIONS" | grep -q "^$extension$"; then
@@ -134,14 +88,14 @@ if [ -f "extensions.txt" ]; then
 fi
 quiet cp -r ./cursor/settings.json ~/Library/Application\ Support/Cursor/User
 
-###
-# 12. stow
-###
+# zplug
+printf "setup zsh\n"
+quiet curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
+# stow
 printf "stowing dotfiles\n"
 quiet stow alacritty colorls fzf git starship tmux vim z zsh
 
-###
-# 13. zsh
-###
+# reload
 printf "setup zsh\n"
 quiet source ~/.zshrc

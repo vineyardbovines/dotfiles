@@ -1,6 +1,4 @@
-###
-# Tap
-###
+# tap
 tap "homebrew/cask-fonts"
 tap "homebrew/bundle"
 tap "wix/brew"
@@ -8,122 +6,143 @@ tap "mobile-dev-inc/tap"
 tap "supabase/tap"
 tap "facebook/fb"
 
+# put it in apps god damnit
 cask_args appdir: "/Applications"
 
-###
-# Brew
-###
-
+##
 # gnutils
-brew "ack"
+##
+
+# core
 brew "binutils"
-brew "ccat"
 brew "coreutils"
-brew "diff-so-fancy"
 brew "diffutils"
 brew "findutils"
-brew "fzf"
-brew "gawk"
+brew "moreutils"
+# prefixed
 brew "gnu-sed"
 brew "gnu-tar"
 brew "gnu-time"
 brew "gnu-which"
-brew "gnupg"
+# file search/display/manipulation/etc
+brew "ack"
+brew "ccat"
+brew "fzf"
 brew "grep"
-brew "gzip"
-brew "htop"
+brew "jq"
 brew "less"
-brew "moreutils"
-brew "ncurses"
+brew "ripgrep"
+brew "stow"
+brew "tree"
+brew "zoxide"
+# processing
+brew "gawk"
+brew "rename"
+brew "ffmpeg"
+# compression
+brew "gzip"
+brew "unzip"
+brew "asimov" # time-machine enhancement
+# inline editing
+brew "readline"
+# networking/system
+brew "gnupg"
+brew "htop"
 brew "nmap"
 brew "openssh"
 brew "openssl"
-brew "readline"
-brew "rename"
 brew "rsync"
-brew "screen"
 brew "telnet"
-brew "tree"
 brew "wget"
-brew "unzip"
-brew "vim"
 
+brew "mas" # mac app store search
+
+##
 # terminal
-brew "zsh"
+##
 brew "direnv"
-brew "stow"
+brew "neovim"
+brew "starship"
 brew "tmux"
-brew "ripgrep"
+brew "zsh"
 
+##
 # dev
+##
+
 brew "git"
 brew "git-lfs"
+# js
 brew "node"
-brew "awscli"
-brew "python"
-brew "pyenv"
-brew "aria2"
-brew "graphviz"
-brew "grpc"
-brew "redis"
-brew "postgresql"
-brew "sqlite"
-brew "supabase"
-brew "yarn"
-brew "ruby"
-
-# mobile
-brew "applesimutils"
+brew "n" # node version manager
+brew "pnpm"
+# ios/mobile
+brew "aria2" # dependency for xcodes
 brew "watchman"
 brew "xcpretty"
 brew "xctool"
-brew "swiftlint"
-brew "swift-format"
+brew "xcodes"
 brew "cocoapods"
 brew "fastlane"
 brew "idb-companion"
 brew "libimobiledevice"
 brew "maestro"
+# python
+brew "python"
+brew "pyenv"
+# ruby
+brew "chruby"
+brew "ruby-install"
+# rust
+brew "rust"
+# db/cache
+brew "postgresql"
+brew "sqlite"
+brew "redis"
+# misc tools"
+brew "graphviz"
+# services
+brew "awscli"
+
+##
+# cask
+##
 
 # tools
-brew "ffmpeg"
-brew "jq"
-brew "mas"
-brew "zlib"
-brew "asimov"
-
-###
-# Cask
-##
 cask "1password"
 cask "1password-cli"
-cask "alacritty"
-cask "android-commandlinetools"
-cask "android-studio"
-cask "arc"
-cask "anytype"
 cask "cleanshot"
-cask "cursor"
-cask "expo-orbit"
-cask "font-hack"
-cask "font-hack-nerd-font"
-cask "google-chrome"
 cask "jordanbaird-ice"
-cask "ledger-live"
-cask "linear"
-cask "mos"
 cask "raycast"
 cask "rectangle"
+cask "the-unarchiver"
+cask "transmission"
+
+# apps
+cask "discord"
+cask "ledger-live"
+cask "notunes"
 cask "slack"
 cask "spotify"
-cask "the-unarchiver"
-cask "todoist"
-cask "transmission"
-cask "visual-studio-code"
-# cask "xcodes" ## this runs in the install script
-cask "yaak"
-cask "zoom"
+cask "whatsapp"
 
-# android
+# browsers
+cask "arc"
+cask "google-chrome"
+
+# terminal/ide
+cask "alacritty"
+cask "cursor"
+cask "font-hack"
+cask "font-hack-nerd-font"
+
+# dev
+cask "xcodes"
+cask "android-commandlinetools"
+cask "android-studio" # ugh
+cask "clickhouse"
+cask "expo-orbit"
+cask "yaak"
+# android shit
 cask "zulu@17"
 brew "gradle"

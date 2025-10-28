@@ -19,6 +19,8 @@ alias gchp="git cherry-pick"
 alias gst="git stash"
 alias gsa="git stash apply"
 alias gsd="git stash drop"
+alias gd="git diff"
+alias gra="git remote add"
 
 # open merge conflicts in cursor
 alias gitfix="git diff --name-only | uniq | xargs cursor"

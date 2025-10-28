@@ -65,8 +65,6 @@ quiet curl -fsSL https://bun.sh/install | bash
 
 # ruby
 printf "setup ruby\n"
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-quiet ruby-install ruby # latest stable
 echo "gem: --no-document" >> ~/.gemrc
 quiet gem install bundler clocale colorls fastlane cocoapods
 
@@ -94,7 +92,7 @@ quiet curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/
 
 # stow
 printf "stowing dotfiles\n"
-quiet stow alacritty colorls fzf git starship tmux vim z zsh
+quiet stow wezterm colorls fzf git starship tmux vim z zsh
 
 # reload
 printf "setup zsh\n"

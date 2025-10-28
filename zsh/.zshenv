@@ -17,12 +17,6 @@ if (( $+commands[lesspipe.sh] )); then
   export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
 fi
 
-# ruby
-export RUBIES=(~/.rubies/*)
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-# auto-switch ruby versions
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-
 # set the list of dirs that zsh searches for programs
 path=(
     /usr/local/{bin,sbin}

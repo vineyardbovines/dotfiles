@@ -29,6 +29,10 @@ export PYTHONIOENCODING='UTF-8'
 export PYENV_SHELL=zsh
 command pyenv rehash 2>/dev/null
 
+# ruby
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="$(gem environment gemdir)/bin:$PATH"
+
 # node
 export PNPM_HOME=$HOME/.pnpm
 export PATH=$PNPM_HOME:$PATH

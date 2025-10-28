@@ -90,9 +90,6 @@ brew "maestro"
 # python
 brew "python"
 brew "pyenv"
-# ruby
-brew "chruby"
-brew "ruby-install"
 # rust
 brew "rust"
 # db/cache
@@ -131,10 +128,10 @@ cask "arc"
 cask "google-chrome"
 
 # terminal/ide
-cask "alacritty"
 cask "cursor"
 cask "font-hack"
 cask "font-hack-nerd-font"
+cask "wezterm"
 
 # dev
 cask "xcodes"

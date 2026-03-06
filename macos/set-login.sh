@@ -3,7 +3,7 @@
 declare -a LOGIN_ITEMS=(
     "/Applications/1Password.app"
     "/Applications/Claude.app"
-    "/Applications/Cleanshot X.app",
+    "/Applications/CleanShot X.app",
     "/Applications/Expo Orbit.app",
     "/Applications/noTunes.app",
     "/Applications/Raycast.app",

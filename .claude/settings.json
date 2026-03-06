@@ -1,0 +1,20 @@
+{
+    "permissions": {
+      "allow": [
+        "Bash(bun:*)",
+        "Bash(npm:*)",
+        "Bash(npx:*)",
+        "Bash(ls:*)",
+        "Bash(grep:*)",
+        "Bash(jq:*)",
+        "Bash(curl:*)",
+        "Read",
+        "WebFetch",
+        "WebSearch"
+      ]
+    },
+    "statusLine": {
+      "type": "command",
+      "command": "bash $CLAUDE_CONFIG_DIR/commands/statusline.sh"
+    }
+  }

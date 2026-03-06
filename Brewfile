@@ -1,0 +1,103 @@
+# put it in apps god damnit
+cask_args appdir: "/Applications"
+
+# core
+brew "binutils"
+brew "coreutils"
+brew "diffutils"
+brew "findutils"
+brew "moreutils"
+# prefixed
+brew "gnu-sed"
+brew "gnu-tar"
+brew "gnu-time"
+brew "gnu-which"
+# file search/display/manipulation/etc
+brew "ack"
+brew "ccat"
+brew "fzf"
+brew "grep"
+brew "jq"
+brew "less"
+brew "ripgrep"
+brew "stow"
+brew "tree"
+brew "zoxide"
+# processing
+brew "gawk"
+brew "rename"
+brew "ffmpeg"
+# compression
+brew "gzip"
+brew "unzip"
+brew "asimov" # time-machine enhancement
+# inline editing
+brew "readline"
+# networking/system
+brew "gnupg"
+brew "htop"
+brew "nmap"
+brew "openssh"
+brew "openssl"
+brew "rsync"
+brew "telnet"
+brew "wget"
+# terminal
+brew "direnv"
+brew "neovim"
+brew "starship"
+brew "tmux"
+brew "zplug"
+# tools
+brew "git"
+brew "git-lfs"
+brew "graphviz"
+brew "dotenvx"
+brew "protobuf"
+# js
+brew "node"
+brew "n" # node version manager
+brew "pnpm"
+# ios/macos
+brew "mas" # mac app store search
+brew "aria2"
+brew "applesimutils"
+brew "watchman"
+brew "xcodes"
+brew "cocoapods"
+tap "facebook/fb"
+brew "idb-companion"
+brew "libimobiledevice"
+tap "mobile-dev-inc/tap"
+brew "maestro"
+# python
+brew "python"
+brew "pyenv"
+# db/cache
+brew "postgresql"
+brew "sqlite"
+brew "redis"
+
+cask "1password"
+cask "android-studio"
+cask "arc"
+cask "claude"
+cask "claude-code"
+cask "cleanshot"
+cask "discord"
+cask "expo-orbit"
+cask "figma"
+cask "font-hack"
+cask "font-hack-nerd-font"
+cask "linear-linear"
+cask "notunes"
+cask "raycast"
+cask "rectangle"
+cask "spotify"
+cask "tailscale-app"
+cask "the-unarchiver"
+cask "visual-studio-code"
+cask "wezterm"
+cask "xcodes"
+cask "xcodes-app"
+cask "zulu@17"

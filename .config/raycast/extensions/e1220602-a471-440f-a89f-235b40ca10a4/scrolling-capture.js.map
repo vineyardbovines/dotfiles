@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/scrolling-capture.tsx"],
+  "sourcesContent": ["import { closeMainWindow, open } from \"@raycast/api\";\n\nexport default async function Command() {\n  const url = \"cleanshot://scrolling-capture\";\n  await closeMainWindow();\n  open(url);\n}\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAsC,wBAEtC,eAAOF,GAAiC,CACtC,IAAMG,EAAM,gCACZ,QAAM,mBAAgB,KACtB,QAAKA,CAAG,CACV",
+  "names": ["scrolling_capture_exports", "__export", "Command", "__toCommonJS", "import_api", "url"]
+}

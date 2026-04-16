@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/self-timer.tsx"],
+  "sourcesContent": ["import { LaunchProps, closeMainWindow, open } from \"@raycast/api\";\n\nexport default async function Command(props: LaunchProps<{ arguments: Arguments.SelfTimer }>) {\n  const url = \"cleanshot://self-timer\";\n  await closeMainWindow();\n  if (props.arguments?.action) open(url + \"?action=\" + props.arguments.action);\n  else open(url);\n}\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAmD,wBAEnD,eAAOF,EAA+BG,EAAwD,CAC5F,IAAMC,EAAM,yBACZ,QAAM,mBAAgB,EAClBD,EAAM,WAAW,UAAQ,QAAKC,EAAM,WAAaD,EAAM,UAAU,MAAM,KACtE,QAAKC,CAAG,CACf",
+  "names": ["self_timer_exports", "__export", "Command", "__toCommonJS", "import_api", "props", "url"]
+}

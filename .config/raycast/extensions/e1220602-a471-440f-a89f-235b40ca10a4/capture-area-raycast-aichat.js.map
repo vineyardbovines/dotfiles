@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/capture-area-raycast-aichat.tsx"],
+  "sourcesContent": ["import { AI, closeMainWindow, environment, open, showToast } from \"@raycast/api\";\n\nexport default async function Command() {\n  if (!environment.canAccess(AI)) {\n    await showToast({ title: \"Command requires Pro subscription\" });\n    return;\n  }\n\n  const url = \"cleanshot://capture-area-raycast-aichat\";\n  await closeMainWindow();\n  open(url);\n}\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAkE,wBAElE,eAAOF,GAAiC,CACtC,GAAI,CAAC,cAAY,UAAU,IAAE,EAAG,CAC9B,QAAM,aAAU,CAAE,MAAO,mCAAoC,CAAC,EAC9D,MACF,CAEA,IAAMG,EAAM,0CACZ,QAAM,mBAAgB,KACtB,QAAKA,CAAG,CACV",
+  "names": ["capture_area_raycast_aichat_exports", "__export", "Command", "__toCommonJS", "import_api", "url"]
+}

@@ -1,20 +1,44 @@
 {
-    "permissions": {
-      "allow": [
-        "Bash(bun:*)",
-        "Bash(npm:*)",
-        "Bash(npx:*)",
-        "Bash(ls:*)",
-        "Bash(grep:*)",
-        "Bash(jq:*)",
-        "Bash(curl:*)",
-        "Read",
-        "WebFetch",
-        "WebSearch"
-      ]
-    },
-    "statusLine": {
-      "type": "command",
-      "command": "bash $CLAUDE_CONFIG_DIR/commands/statusline.sh"
-    }
-  }
+	"permissions": {
+		"allow": ["Bash", "Read", "Edit", "Grep", "Glob", "WebFetch", "WebSearch"],
+		"defaultMode": "acceptEdits"
+	},
+	"statusLine": {
+		"type": "command",
+		"command": "bash $CLAUDE_CONFIG_DIR/commands/statusline.sh"
+	},
+	"enabledPlugins": {
+		"superpowers@claude-plugins-official": true,
+		"code-review@claude-plugins-official": true,
+		"code-simplifier@claude-plugins-official": true,
+		"ralph-loop@claude-plugins-official": true,
+		"feature-dev@claude-plugins-official": true,
+		"self-improving-agent@claude-code-skills": true,
+		"frontend-design@claude-plugins-official": true,
+		"typescript-lsp@claude-plugins-official": true,
+		"claude-mem@thedotmack": true
+	},
+	"extraKnownMarketplaces": {
+		"claude-code-skills": {
+			"source": {
+				"source": "github",
+				"repo": "alirezarezvani/claude-skills"
+			}
+		},
+		"karpathy-skills": {
+			"source": {
+				"source": "github",
+				"repo": "forrestchang/andrej-karpathy-skills"
+			}
+		},
+		"thedotmack": {
+			"source": {
+				"source": "github",
+				"repo": "thedotmack/claude-mem"
+			}
+		}
+	},
+	"effortLevel": "high",
+	"advisorModel": "opus",
+	"awaySummaryEnabled": false
+}

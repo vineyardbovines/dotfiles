@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/open-settings.tsx"],
+  "sourcesContent": ["import { LaunchProps, closeMainWindow, open } from \"@raycast/api\";\n\nexport default async function Command(props: LaunchProps<{ arguments: Arguments.OpenSettings }>) {\n  const url = \"cleanshot://open-settings\";\n  await closeMainWindow();\n  if (props.arguments?.tab) open(url + \"?tab=\" + props.arguments.tab);\n  else open(url);\n}\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAmD,wBAEnD,eAAOF,EAA+BG,EAA2D,CAC/F,IAAMC,EAAM,4BACZ,QAAM,mBAAgB,EAClBD,EAAM,WAAW,OAAK,QAAKC,EAAM,QAAUD,EAAM,UAAU,GAAG,KAC7D,QAAKC,CAAG,CACf",
+  "names": ["open_settings_exports", "__export", "Command", "__toCommonJS", "import_api", "props", "url"]
+}

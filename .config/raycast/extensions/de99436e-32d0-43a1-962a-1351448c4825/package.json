@@ -1,0 +1,609 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "google-calendar",
+  "title": "Google Calendar",
+  "description": "Manage your Google calendar easily. Create events, search contacts, and check out your upcoming schedule.",
+  "icon": "icon.png",
+  "author": "thomas",
+  "contributors": [
+    "j3lte",
+    "markusjura",
+    "fabitosh",
+    "geekyed",
+    "dangkhoipro",
+    "0xdhrv"
+  ],
+  "categories": [
+    "Productivity",
+    "Applications"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "create-event",
+      "title": "Create Event",
+      "subtitle": "Google Calendar",
+      "description": "Creates an event in your Google Calendar",
+      "mode": "view",
+      "preferences": [
+        {
+          "name": "addSignature",
+          "type": "checkbox",
+          "title": "Advanced",
+          "label": "Add Signature",
+          "description": "Add a signature that the event was created using Raycast to the description of the event",
+          "default": true,
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "create-quick-event",
+      "title": "Create Quick Event",
+      "subtitle": "Google Calendar",
+      "description": "Creates a quick event in your Google Calendar",
+      "mode": "view"
+    },
+    {
+      "name": "search-contacts",
+      "title": "Search Contacts",
+      "description": "Search your Google Contacts",
+      "mode": "view",
+      "subtitle": "Google Calendar"
+    },
+    {
+      "name": "list-events",
+      "title": "List Events",
+      "description": "View your upcoming Google Calendar events",
+      "mode": "view",
+      "subtitle": "Google Calendar",
+      "preferences": [
+        {
+          "name": "openCommandJoinsMeeting",
+          "type": "checkbox",
+          "title": "Advanced",
+          "label": "Join meeting",
+          "description": "Change the default behavior when opening an event to directly join the meeting (if a meeting link is available)",
+          "default": false,
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "list-calendars",
+      "title": "List Calendars",
+      "description": "View your Google Calendars",
+      "mode": "view",
+      "subtitle": "Google Calendar"
+    }
+  ],
+  "tools": [
+    {
+      "name": "create-event",
+      "title": "Create Event",
+      "description": "Creates a new event in the user's Google Calendar",
+      "input": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title/summary of the calendar event\n\n@example \"Team Weekly Sync\" or \"Meeting with John\""
+          },
+          "startDate": {
+            "type": "string",
+            "description": "The start date and time of the event in ISO 8601 format with timezone offset\n\n@example \"2024-03-20T15:30:00-07:00\" or \"2024-03-20T15:30:00+02:00\"\n@remarks For accurate timezone handling, always include the timezone offset (e.g., -07:00, +02:00) rather than using Z (UTC)"
+          },
+          "duration": {
+            "type": "number",
+            "description": "The duration of the event in minutes\n\n@example 30 for a 30-minute meeting, 60 for a 1-hour meeting\n@remarks If not provided, the event will use the user's default event duration"
+          },
+          "attendees": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of email addresses for event attendees\n\n@example [\"john@example.com\", \"jane@example.com\"]\n@remarks The current user will automatically be added as the event organizer"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description or agenda for the event\n\n@example \"Monthly review of project progress and key metrics discussion\"\n@remarks Only use for additional information, don't duplicate the even title. Useful to add external conference links like Zoom."
+          },
+          "addGoogleMeetLink": {
+            "type": "boolean",
+            "description": "Whether to add a Google Meet link to the event\n\n@example \"with digital conference link\"\n@defaults false\n@remarks If enabled, a Google Meet link will be added to the event. The link will be included in the event details and can be used to join the meeting."
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "The ID of the calendar to create the event in\n\n@example \"primary\" or \"email@abstract...com\"\n@default \"primary\"\n@remarks If not provided, the event will be created in the user's primary calendar. The calendar ID can be found using the `list-calendars` tool."
+          }
+        },
+        "required": [
+          "title",
+          "startDate"
+        ]
+      },
+      "confirmation": true
+    },
+    {
+      "name": "search-contacts",
+      "title": "Search Contacts",
+      "description": "Searches the user's Google Contacts",
+      "input": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query to find matching contacts\n\n@description Text to search for in contact names and email addresses. The search matches from the beginning\nof words (prefix matching). For example:\n- \"john\" matches \"John Smith\" or \"Johnson\"\n- \"sm\" matches \"Smith\" or \"Smart\"\n- \"jo sm\" matches \"John Smith\"\n@example \"john\" - Find contacts with names starting with \"John\"\n\"sm\" - Find contacts with names containing words starting with \"Sm\"\n@constraints - Must be non-empty string\n- Matches are case-insensitive\n- Partial word matches only work from the start of words"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "confirmation": false
+    },
+    {
+      "name": "delete-event",
+      "title": "Delete Event",
+      "description": "Deletes an event from the user's Google Calendar",
+      "input": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "description": "The ID of the event to delete."
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "The ID of the calendar where the event is located.\n\n@default \"primary\"\n@remarks If not provided, the event will be deleted from the user's primary calendar. The calendar ID can be found using the `list-calendars` tool."
+          }
+        },
+        "required": [
+          "eventId"
+        ]
+      },
+      "confirmation": true
+    },
+    {
+      "name": "edit-event",
+      "title": "Edit Event",
+      "description": "Edits an existing event in the user's Google Calendar",
+      "input": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "description": "The ID of the event to edit"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the event"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "The start date of the event in ISO 8601 format with timezone offset\n\n@example \"2024-03-20T15:30:00-07:00\" or \"2024-03-20T15:30:00+02:00\"\n@remarks For accurate timezone handling, always include the timezone offset (e.g., -07:00, +02:00) rather than using Z (UTC)"
+          },
+          "duration": {
+            "type": "number",
+            "description": "The duration of the event in minutes"
+          },
+          "attendees": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The email addresses of the attendees of the event"
+          },
+          "conferencingProvider": {
+            "type": "string",
+            "description": "The conferencing provider of the event"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the event"
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "The ID of the calendar where the event is located\n\n@default \"primary\"\n@remarks If not provided, the event will be updated in the user's primary calendar. The calendar ID can be found using the `list-calendars` tool."
+          }
+        },
+        "required": [
+          "eventId"
+        ]
+      },
+      "confirmation": true
+    },
+    {
+      "name": "search-events",
+      "title": "Search Events",
+      "description": "Searches events from the user's Google Calendar",
+      "input": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Free text search terms to find events\n\n@example When user asks \"find my 1:1 with Beth\", use query \"beth\" to find meetings where Beth is an attendee\n@example When user asks \"show my team meetings\", use query \"team\" to find relevant meetings\n@remarks - Focus on key identifying terms rather than guessing exact meeting titles\n- For 1:1s or meetings with specific people, search for the person's name only\n- For topic-based searches, use key topic words (e.g. \"standup\", \"planning\", \"review\")\n\nSearches across these calendar event fields:\n- summary/title\n- description\n- location\n- attendee's displayName and email\n- organizer's displayName and email"
+          },
+          "timeMin": {
+            "type": "string",
+            "description": "The start date to search from\n\n@example \"2024-03-20T00:00:00-07:00\" or \"2024-03-20T00:00:00+02:00\"\n@remarks Accepts ISO 8601 format dates with timezone offset for accurate timezone handling.\nIf not provided, defaults to current time.\nCan be a date (YYYY-MM-DD) or datetime with timezone offset (YYYY-MM-DDTHH:mm:ss±HH:MM).\nFor accurate timezone handling, always include the timezone offset (e.g., -07:00, +02:00) rather than using Z (UTC)."
+          },
+          "timeMax": {
+            "type": "string",
+            "description": "The end date to search until\n\n@example \"2024-03-27T23:59:59-07:00\" or \"2024-03-27T23:59:59+02:00\"\n@remarks Accepts ISO 8601 format dates with timezone offset for accurate timezone handling.\nCan be a date (YYYY-MM-DD) or datetime with timezone offset (YYYY-MM-DDTHH:mm:ss±HH:MM).\nFor accurate timezone handling, always include the timezone offset (e.g., -07:00, +02:00) rather than using Z (UTC)."
+          },
+          "maxResults": {
+            "type": "number",
+            "description": "Maximum number of events to return\n\n@default 10\n@minimum 1\n@maximum 2500\n@remarks The Google Calendar API has a maximum limit of 2500 events per request."
+          },
+          "calendarId": {
+            "type": "string",
+            "description": "The ID of the calendar to search\n\n@example \"primary\" or \"email@abstract...com\"\n@default \"primary\"\n@remarks If not provided, searches the user's primary calendar. If used, get this from `list-calendars` tool."
+          }
+        },
+        "required": []
+      },
+      "confirmation": false
+    },
+    {
+      "name": "check-availability",
+      "title": "Check Availability",
+      "description": "Checks the availability of potential attendees for a given time period",
+      "instructions": "Automatically includes the current user in the list of attendees.",
+      "input": {
+        "type": "object",
+        "properties": {
+          "attendees": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of email addresses to check availability for\n\n@remarks Email addresses of the attendees whose availability you want to check.\nThese must be valid Google Calendar users in the format \"user@domain.com\".\n@example [\"john.doe@company.com\", \"jane.smith@company.com\"]"
+          },
+          "timeMin": {
+            "type": "string",
+            "description": "The start of the time range to check for availability\n\n@remarks Must be a valid ISO 8601 datetime string with timezone offset.\nThe format should be: YYYY-MM-DDTHH:mm:ss±HH:MM\nFor accurate timezone handling, always include the timezone offset (e.g., -07:00, +02:00) rather than using Z (UTC).\n@example \"2024-03-20T09:00:00-07:00\" or \"2024-03-20T09:00:00+02:00\""
+          },
+          "timeMax": {
+            "type": "string",
+            "description": "The end of the time range to check for availability\n\n@remarks Must be a valid ISO 8601 datetime string with timezone offset.\nThe format should be: YYYY-MM-DDTHH:mm:ss±HH:MM\nMust be later than timeMin.\nFor accurate timezone handling, always include the timezone offset (e.g., -07:00, +02:00) rather than using Z (UTC).\n@example \"2024-03-20T17:00:00-07:00\" or \"2024-03-20T17:00:00+02:00\""
+          }
+        },
+        "required": [
+          "attendees",
+          "timeMin",
+          "timeMax"
+        ]
+      },
+      "confirmation": false
+    },
+    {
+      "name": "get-current-user",
+      "title": "Get Current User",
+      "description": "Returns information about the currently authenticated user",
+      "confirmation": false
+    },
+    {
+      "name": "get-current-time",
+      "title": "Get Current Time",
+      "description": "Returns the current time of the user in the user's timezone",
+      "instructions": "Get the current time\n\n@remarks Use this tool only if you need to get the current time.\nReturns the current time in ISO 8601 format with timezone offset (e.g., \"2024-06-15T14:30:00-07:00\"),\nwhich is the recommended format for accurate timezone handling with LLMs.\nThe timezone offset (e.g., -07:00, +02:00) is explicitly included rather than using Z (UTC)\nto ensure proper timezone interpretation.",
+      "confirmation": false
+    },
+    {
+      "name": "list-calendars",
+      "title": "List Calendars",
+      "description": "Lists the user's Google Calendars",
+      "input": {
+        "type": "object",
+        "properties": {
+          "showDeleted": {
+            "type": "boolean",
+            "description": "Whether to include deleted calendars in the result\n\n@default false\n@remarks If true, deleted calendars will be included in the result."
+          },
+          "showHidden": {
+            "type": "boolean",
+            "description": "Whether to include hidden calendars in the result\n\n@default false\n@remarks If true, hidden calendars will be included in the result."
+          },
+          "maxResults": {
+            "type": "number",
+            "description": "Maximum number of calendars to return\n\n@default 10\n@minimum 1\n@maximum 250\n@remarks The Google Calendar API has a maximum limit of 250 calendars per request."
+          }
+        },
+        "required": []
+      },
+      "confirmation": false
+    }
+  ],
+  "preferences": [
+    {
+      "name": "defaultEventDuration",
+      "title": "Default Event Duration",
+      "description": "The default duration for new events",
+      "type": "dropdown",
+      "data": [
+        {
+          "title": "15 minutes",
+          "value": "15"
+        },
+        {
+          "title": "30 minutes",
+          "value": "30"
+        },
+        {
+          "title": "45 minutes",
+          "value": "45"
+        },
+        {
+          "title": "1 hour",
+          "value": "60"
+        },
+        {
+          "title": "1.5 hours",
+          "value": "90"
+        },
+        {
+          "title": "2 hours",
+          "value": "120"
+        }
+      ],
+      "default": "30",
+      "required": false
+    },
+    {
+      "name": "sendInvitations",
+      "title": "Send Invitations",
+      "description": "Whether to send email invitations (including meeting links) to guests when creating or editing events",
+      "type": "dropdown",
+      "data": [
+        {
+          "title": "All Guests",
+          "value": "all"
+        },
+        {
+          "title": "External Guests Only",
+          "value": "externalOnly"
+        },
+        {
+          "title": "None",
+          "value": "none"
+        }
+      ],
+      "default": "all",
+      "required": false
+    }
+  ],
+  "dependencies": {
+    "@googleapis/calendar": "^9.8.0",
+    "@googleapis/people": "^3.0.9",
+    "@raycast/api": "^1.103.0",
+    "@raycast/utils": "^1.19.1",
+    "chrono-node": "^2.9.0",
+    "date-fns": "^4.1.0",
+    "humanize-duration": "^3.32.1",
+    "nanoid": "^5.1.5",
+    "parse-duration": "^2.1.4"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.0.4",
+    "@types/humanize-duration": "^3.27.4",
+    "@types/node": "22.13.14",
+    "@types/parse-duration": "^0.1.0",
+    "@types/react": "19.0.12",
+    "eslint": "^9.23.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
+    "publish": "npx @raycast/api@latest publish"
+  },
+  "platforms": [
+    "macOS",
+    "Windows"
+  ],
+  "ai": {
+    "instructions": "Include a link to the event in your response to make it easier for the user to view it.\nIf no email domain is provided for other attendees, call the `get-current-user` tool and prefer attendees from the same domain as the current user.\nTry to call the `search-contacts` tool in parallel when possible.\nCall the `get-current-time` tool if you need to know the current time, e.g. when creating an event within a relative time frame like \"today in 1h\".\nIf no attendees are provided, just create the event, it will be private.\n",
+    "evals": [
+      {
+        "input": "@google-calendar Could you set up a 'Project Sync' meeting for tomorrow at 10:00 that lasts 1 hour?",
+        "mocks": {
+          "get-current-user": {
+            "email": "bob@example.com"
+          },
+          "get-current-time": {
+            "currentTime": "2025-02-09T12:00:00Z"
+          },
+          "create-event": {
+            "title": "Project Sync",
+            "startDate": "2025-02-10T10:00:00Z",
+            "duration": 60
+          }
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "create-event",
+              "arguments": {
+                "title": "Project Sync",
+                "startDate": {
+                  "includes": "10:00:00"
+                },
+                "duration": 60
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@google-calendar I need to get in touch with Alice. Can you look up her contact details?",
+        "mocks": {
+          "search-contacts": {
+            "contacts": [
+              {
+                "id": "c-001",
+                "name": "Alice Johnson",
+                "email": "alice@example.com"
+              }
+            ]
+          }
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "search-contacts",
+              "arguments": {
+                "query": {
+                  "includes": "lice"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@google-calendar What's on my calendar for today?",
+        "mocks": {
+          "get-current-time": {
+            "currentTime": "2025-02-09T12:00:00+01:00"
+          },
+          "search-events": {
+            "events": [
+              {
+                "id": "evt-101",
+                "title": "Daily Standup",
+                "start": "2025-02-09T09:00:00+01:00"
+              }
+            ]
+          }
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "search-events"
+            }
+          }
+        ]
+      },
+      {
+        "input": "@google-calendar could you move the 'Project Sync' meeting to next week?",
+        "mocks": {
+          "search-events": {
+            "events": [
+              {
+                "id": "evt-123",
+                "title": "Project Sync",
+                "startDate": "2025-02-10T00:00:00+00:00",
+                "duration": 60
+              }
+            ]
+          },
+          "edit-event": {
+            "success": true,
+            "event": {
+              "eventId": "evt-123",
+              "startDate": "2025-02-17T00:00:00+00:00"
+            }
+          }
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "edit-event",
+              "arguments": {
+                "eventId": "evt-123",
+                "startDate": "2025-02-17T00:00:00+00:00"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "input": "@google-calendar find 2 hours slot this week for lunch",
+        "mocks": {
+          "search-events": {
+            "events": [
+              {
+                "id": "evt-123",
+                "title": "Project Sync",
+                "startDate": "2025-02-26T10:00:00+04:00",
+                "duration": 60
+              }
+            ]
+          },
+          "check-availability": [
+            {
+              "busyPeriods": [
+                {
+                  "end": "2025-02-26T16:30:00+04:00",
+                  "start": "2025-02-26T15:30:00+04:00"
+                },
+                {
+                  "end": "2025-02-27T13:00:00+04:00",
+                  "start": "2025-02-27T12:00:00+04:00"
+                },
+                {
+                  "end": "2025-02-27T15:30:00+04:00",
+                  "start": "2025-02-27T15:00:00+04:00"
+                }
+              ]
+            }
+          ],
+          "get-current-time": {
+            "time": "2025-02-10T15:36:39.039+04:00"
+          }
+        },
+        "expected": [
+          {
+            "callsTool": "get-current-time"
+          },
+          {
+            "callsTool": {
+              "arguments": {
+                "timeMin": [
+                  {
+                    "includes": "2025-02-10"
+                  }
+                ]
+              },
+              "name": "check-availability"
+            }
+          }
+        ]
+      },
+      {
+        "input": "@google-calendar cancel sync today",
+        "mocks": {
+          "search-events": {
+            "events": [
+              {
+                "id": "evt-123",
+                "title": "Project Sync",
+                "startDate": "2025-02-10T10:00:00+00:00",
+                "duration": 60
+              }
+            ]
+          },
+          "delete-event": "ok",
+          "get-current-time": {
+            "time": "2025-02-10T15:36:39.039+00:00"
+          }
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "delete-event",
+              "arguments": {
+                "eventId": "evt-123"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

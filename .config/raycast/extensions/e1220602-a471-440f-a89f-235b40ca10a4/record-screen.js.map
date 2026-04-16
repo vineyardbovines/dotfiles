@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../src/record-screen.tsx"],
-  "sourcesContent": ["import { closeMainWindow, open } from \"@raycast/api\";\n\nexport default async function Command() {\n  const url = \"cleanshot://record-screen\";\n  await closeMainWindow();\n  open(url);\n}\n"],
-  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAsC,wBAEtC,eAAOF,GAAiC,CACtC,IAAMG,EAAM,4BACZ,QAAM,mBAAgB,KACtB,QAAKA,CAAG,CACV",
-  "names": ["record_screen_exports", "__export", "Command", "__toCommonJS", "import_api", "url"]
-}

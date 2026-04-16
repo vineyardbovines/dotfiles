@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../src/restore-recently-closed.tsx"],
-  "sourcesContent": ["import { closeMainWindow, open } from \"@raycast/api\";\n\nexport default async function Command() {\n  const url = \"cleanshot://restore-recently-closed\";\n  await closeMainWindow();\n  open(url);\n}\n"],
-  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAsC,wBAEtC,eAAOF,GAAiC,CACtC,IAAMG,EAAM,sCACZ,QAAM,mBAAgB,KACtB,QAAKA,CAAG,CACV",
-  "names": ["restore_recently_closed_exports", "__export", "Command", "__toCommonJS", "import_api", "url"]
-}

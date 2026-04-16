@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../src/open-history.tsx"],
-  "sourcesContent": ["import { closeMainWindow, open } from \"@raycast/api\";\n\nexport default async function Command() {\n  const url = \"cleanshot://open-history\";\n  await closeMainWindow();\n  open(url);\n}\n"],
-  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAsC,wBAEtC,eAAOF,GAAiC,CACtC,IAAMG,EAAM,2BACZ,QAAM,mBAAgB,KACtB,QAAKA,CAAG,CACV",
-  "names": ["open_history_exports", "__export", "Command", "__toCommonJS", "import_api", "url"]
-}

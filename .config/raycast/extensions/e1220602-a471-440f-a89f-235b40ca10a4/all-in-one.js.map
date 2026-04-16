@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../src/all-in-one.tsx"],
-  "sourcesContent": ["import { closeMainWindow, open } from \"@raycast/api\";\n\nexport default async function Command() {\n  const url = \"cleanshot://all-in-one\";\n  await closeMainWindow();\n  open(url);\n}\n"],
-  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAsC,wBAEtC,eAAOF,GAAiC,CACtC,IAAMG,EAAM,yBACZ,QAAM,mBAAgB,KACtB,QAAKA,CAAG,CACV",
-  "names": ["all_in_one_exports", "__export", "Command", "__toCommonJS", "import_api", "url"]
-}

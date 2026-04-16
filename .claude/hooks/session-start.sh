@@ -1,0 +1,20 @@
+#!/bin/bash
+# SessionStart hook: Inject last session context if recent (<72h)
+# Outputs to stdout which gets injected into Claude's context
+
+SESSIONFILE="$HOME/.claude/last-session.md"
+
+# Exit if no session file
+[ -f "$SESSIONFILE" ] || exit 0
+
+# Check if file is less than 72 hours old
+FILE_AGE=$(( $(date +%s) - $(stat -f%m "$SESSIONFILE") ))
+
+# 259200 seconds = 72 hours (covers weekends)
+if [ "$FILE_AGE" -lt 259200 ] 2>/dev/null; then
+  echo "=== Previous Session Context ==="
+  cat "$SESSIONFILE"
+  echo "=== End Previous Session ==="
+fi
+
+exit 0

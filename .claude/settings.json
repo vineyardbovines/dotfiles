@@ -1,44 +1,171 @@
 {
-	"permissions": {
-		"allow": ["Bash", "Read", "Edit", "Grep", "Glob", "WebFetch", "WebSearch"],
-		"defaultMode": "acceptEdits"
-	},
-	"statusLine": {
-		"type": "command",
-		"command": "bash $CLAUDE_CONFIG_DIR/commands/statusline.sh"
-	},
-	"enabledPlugins": {
-		"superpowers@claude-plugins-official": true,
-		"code-review@claude-plugins-official": true,
-		"code-simplifier@claude-plugins-official": true,
-		"ralph-loop@claude-plugins-official": true,
-		"feature-dev@claude-plugins-official": true,
-		"self-improving-agent@claude-code-skills": true,
-		"frontend-design@claude-plugins-official": true,
-		"typescript-lsp@claude-plugins-official": true,
-		"claude-mem@thedotmack": true
-	},
-	"extraKnownMarketplaces": {
-		"claude-code-skills": {
-			"source": {
-				"source": "github",
-				"repo": "alirezarezvani/claude-skills"
-			}
-		},
-		"karpathy-skills": {
-			"source": {
-				"source": "github",
-				"repo": "forrestchang/andrej-karpathy-skills"
-			}
-		},
-		"thedotmack": {
-			"source": {
-				"source": "github",
-				"repo": "thedotmack/claude-mem"
-			}
-		}
-	},
-	"effortLevel": "high",
-	"advisorModel": "opus",
-	"awaySummaryEnabled": false
+    "$schema": "https://json.schemastore.org/claude-code-settings.json",
+    "env": {
+        "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
+        "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+        "CLAUDE_CODE_NO_FLICKER": "1",
+        "DISABLE_TELEMETRY": "1"
+    },
+    "permissions": {
+        "allow": [
+            "Bash(*)",
+            "Read(*)",
+            "Write(*)",
+            "Edit(*)",
+            "Task(*)",
+            "Grep(*)",
+            "Glob(*)",
+            "Search(*)",
+            "Skill(*)",
+            "WebFetch(*)",
+            "WebSearch(*)",
+            "EnterPlanMode(*)",
+            "mcp__claude_buddy__*"
+        ],
+        "deny": [
+            "Read(**/.env*)",
+            "Read(**/credentials.json)",
+            "Read(**/*.p8)",
+            "Read(**/*.p12)",
+            "Read(**/*.pem)",
+            "Read(**/*.key)",
+            "Read(**/*.crt)",
+            "Read(**/*.cer)",
+            "Edit(**/.env*)",
+            "Edit(**/credentials.json)",
+            "Edit(**/*.p8)",
+            "Edit(**/*.p12)",
+            "Edit(**/*.pem)",
+            "Edit(**/*.key)",
+            "Edit(**/*.crt)",
+            "Edit(**/*.cer)",
+            "Write(**/.env*)",
+            "Write(**/credentials.json)",
+            "Write(**/*.p8)",
+            "Write(**/*.p12)",
+            "Write(**/*.pem)",
+            "Write(**/*.key)",
+            "Write(**/*.crt)",
+            "Write(**/*.cer)",
+            "Bash(rm -rf *)",
+            "Bash(rm -rf .*)",
+            "Bash(git push --force*)",
+            "Bash(git push -f*)",
+            "Bash(git push --force-with-lease*)",
+            "Bash(git push*+main*)",
+            "Bash(git reset --hard*)"
+        ],
+        "defaultMode": "acceptEdits"
+    },
+    "advisorModel": "opus",
+    "awaySummaryEnabled": false,
+    "effortLevel": "high",
+    "statusLine": {
+        "type": "command",
+        "command": "/Users/pope/claude-buddy/statusline/buddy-status.sh",
+        "padding": 1,
+        "refreshInterval": 1
+    },
+    "attribution": {
+        "commit": "🦀 Co-authored by: Clawnelius <clawnelius@gmail.com>",
+        "pr": "🦀 Co-authored by: Clawnelius <clawnelius@gmail.com>"
+    },
+    "enabledPlugins": {
+        "superpowers@claude-plugins-official": true,
+        "code-review@claude-plugins-official": true,
+        "code-simplifier@claude-plugins-official": true,
+        "ralph-loop@claude-plugins-official": true,
+        "feature-dev@claude-plugins-official": true,
+        "self-improving-agent@claude-code-skills": true,
+        "frontend-design@claude-plugins-official": true,
+        "typescript-lsp@claude-plugins-official": true,
+        "claude-mem@thedotmack": true
+    },
+    "extraKnownMarketplaces": {
+        "claude-code-skills": {
+            "source": {
+                "source": "github",
+                "repo": "alirezarezvani/claude-skills"
+            }
+        },
+        "karpathy-skills": {
+            "source": {
+                "source": "github",
+                "repo": "forrestchang/andrej-karpathy-skills"
+            }
+        },
+        "thedotmack": {
+            "source": {
+                "source": "github",
+                "repo": "thedotmack/claude-mem"
+            }
+        }
+    },
+    "hooks": {
+        "SessionStart": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash $HOME/.claude/hooks/session-start.sh",
+                        "statusMessage": "Loading previous session context",
+                        "once": true
+                    }
+                ]
+            }
+        ],
+        "PreCompact": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash $HOME/.claude/hooks/session-stop.sh",
+                        "statusMessage": "Saving session context before compaction"
+                    }
+                ]
+            }
+        ],
+        "SessionEnd": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash $HOME/.claude/hooks/session-stop.sh",
+                        "statusMessage": "Saving session summary on exit"
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "Bash",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "/Users/pope/claude-buddy/hooks/react.sh"
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "/Users/pope/claude-buddy/hooks/buddy-comment.sh"
+                    }
+                ]
+            }
+        ],
+        "UserPromptSubmit": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "/Users/pope/claude-buddy/hooks/name-react.sh"
+                    }
+                ]
+            }
+        ]
+    }
 }

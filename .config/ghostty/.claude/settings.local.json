@@ -1,7 +1,19 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ghostty +list-themes:*)"
+      "Bash(mv /Users/pope/dev/.claude/settings.json /Users/pope/dev/.claude/settings.json.bak)",
+      "Bash(ln -s /Users/pope/.claude/settings.json /Users/pope/dev/.claude/settings.json)",
+      "Bash(mv /Users/pope/dev/bsky/.claude/settings.json /Users/pope/dev/bsky/.claude/settings.json.bak)",
+      "Bash(ln -s /Users/pope/.claude/settings.json /Users/pope/dev/bsky/.claude/settings.json)",
+      "Bash(mv /Users/pope/dev/.claude/commands/statusline.sh /Users/pope/dev/.claude/commands/statusline.sh.bak)",
+      "Bash(ln -s /Users/pope/.claude/commands/statusline.sh /Users/pope/dev/.claude/commands/statusline.sh)",
+      "Bash(rm /Users/pope/dev/bsky/.claude/commands/statusline.sh)",
+      "Bash(ln -s /Users/pope/.claude/commands/statusline.sh /Users/pope/dev/bsky/.claude/commands/statusline.sh)",
+      "Bash(mv ~/.claude ~/.claude.bak)",
+      "Bash(ln -s ~/dev/dotfiles/.claude ~/.claude)",
+      "Read(//Users/pope/.claude/**)",
+      "Bash(rm ~/.claude)",
+      "Bash(mv ~/.claude.bak ~/.claude)"
     ]
   }
 }

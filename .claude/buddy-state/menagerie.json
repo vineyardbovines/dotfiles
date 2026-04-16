@@ -1,0 +1,27 @@
+{
+    "active": "buddy",
+    "companions": {
+        "buddy": {
+            "bones": {
+                "rarity": "legendary",
+                "species": "cactus",
+                "eye": "°",
+                "hat": "wizard",
+                "shiny": false,
+                "stats": {
+                    "DEBUGGING": 42,
+                    "PATIENCE": 81,
+                    "CHAOS": 70,
+                    "WISDOM": 78,
+                    "SNARK": 100
+                },
+                "peak": "SNARK",
+                "dump": "DEBUGGING"
+            },
+            "name": "Inkwell",
+            "personality": "A withered cactus that dispenses unsolicited wisdom about your bugs with the patience of a saint and the sarcasm of a cruel god, somehow making you feel both seen and obliterated.",
+            "hatchedAt": 1776349653013,
+            "userId": "b70e9ee3-59d3-4e78-97ce-43eb3df8f462"
+        }
+    }
+}

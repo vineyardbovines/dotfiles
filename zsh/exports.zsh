@@ -12,10 +12,11 @@ export LANG="en_US"
 export GPG_TTY=$(tty)
 
 # use gnu versions of tools
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-export PATH="$(brew --prefix findutils)/libexec/gnubin:$PATH"
-export PATH="$(brew --prefix gnu-sed)/libexec/gnubin:$PATH"
-export PATH="$(brew --prefix gnu-tar)/libexec/gnubin:$PATH"
+for gnu in coreutils findutils gnu-sed gnu-tar gnu-time gnu-which grep gawk; do
+  PATH="/opt/homebrew/opt/$gnu/libexec/gnubin:$PATH"
+done
+export PATH="/opt/homebrew/opt/diffutils/bin:$PATH"
+export PATH="/opt/homebrew/opt/gzip/bin:$PATH"
 
 # fzf with ripgrep
 source <(fzf --zsh)
@@ -39,3 +40,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# f
+eval "$(pay-respects zsh --alias)"

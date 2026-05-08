@@ -15,15 +15,15 @@ export GPG_TTY=$(tty)
 source ~/.zplug/init.zsh
 zplug "plugins/aliases", from:oh-my-zsh
 zplug "plugins/bun", from:oh-my-zsh
+zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/starship", from:oh-my-zsh
 zplug "plugins/safe-paste", from:oh-my-zsh
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting"
 zplug "djui/alias-tips"
 zplug "vineyardbovines/auto-color-ls"
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
 zplug load
 
 autoload -U compinit

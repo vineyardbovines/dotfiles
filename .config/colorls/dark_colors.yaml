@@ -1,46 +1,49 @@
+# Catppuccin Mocha
+# https://catppuccin.com/palette/
+
 # Main Colors
-unrecognized_file: 'coral'
-recognized_file:   'lightsteelblue'
-executable_file:   'darkseagreen'
-dir:              'steelblue'
+unrecognized_file: '#fab387'  # peach
+recognized_file:   '#b4befe'  # lavender
+executable_file:   '#a6e3a1'  # green
+dir:               '#89b4fa'  # blue
 
 # Link
-dead_link: 'indianred'
-link:      'lightseagreen'
+dead_link: '#f38ba8'  # red
+link:      '#94e2d5'  # teal
 
 # Special Files
-socket:    'mediumturquoise'
-blockdev:  'mediumturquoise'
-chardev:   'mediumturquoise'
+socket:    '#89dceb'  # sky
+blockdev:  '#89dceb'  # sky
+chardev:   '#89dceb'  # sky
 
 # Access Modes
-write:     'mediumpurple'
-read:      'darkseagreen'
-exec:      'coral'
-no_access: 'darkred'
+write:     '#cba6f7'  # mauve
+read:      '#a6e3a1'  # green
+exec:      '#fab387'  # peach
+no_access: '#eba0ac'  # maroon
 
 # Age
-day_old:     'mediumturquoise'
-hour_old:    'darkseagreen'
-no_modifier: 'slategray'
+day_old:     '#89dceb'  # sky
+hour_old:    '#a6e3a1'  # green
+no_modifier: '#6c7086'  # overlay0
 
 # File Size
-file_large:  'darkorange'
-file_medium: 'darkgoldenrod'
-file_small:  'wheat'
+file_large:  '#fab387'  # peach
+file_medium: '#f9e2af'  # yellow
+file_small:  '#f5e0dc'  # rosewater
 
 # Random
-report: 'lightsteelblue'
-user:   'mediumpurple'
-tree:   'steelblue'
-empty:  'darkgoldenrod'
-error:  'darkred'
-normal: 'slategray'
-inode:  'mediumpurple'
+report: '#b4befe'  # lavender
+user:   '#cba6f7'  # mauve
+tree:   '#89b4fa'  # blue
+empty:  '#f9e2af'  # yellow
+error:  '#eba0ac'  # maroon
+normal: '#6c7086'  # overlay0
+inode:  '#cba6f7'  # mauve
 
 # Git
-addition:     'darkseagreen'
-modification: 'darkgoldenrod'
-deletion:     'coral'
-untracked:    'darkorange'
-unchanged:    'mediumturquoise'
+addition:     '#a6e3a1'  # green
+modification: '#f9e2af'  # yellow
+deletion:     '#f38ba8'  # red
+untracked:    '#fab387'  # peach
+unchanged:    '#94e2d5'  # teal

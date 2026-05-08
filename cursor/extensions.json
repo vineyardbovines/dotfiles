@@ -1,0 +1,22 @@
+[
+	"anthropic.claude-code",
+	"biomejs.biome",
+	"catppuccin.catppuccin-vsc",
+	"catppuccin.catppuccin-vsc-icons",
+	"christian-kohler.path-intellisense",
+	"davidanson.vscode-markdownlint",
+	"dbaeumer.vscode-eslint",
+	"editorconfig.editorconfig",
+	"golang.go",
+	"gruntfuggly.todo-tree",
+	"llvm-vs-code-extensions.lldb-dap",
+	"llvm-vs-code-extensions.vscode-clangd",
+	"mechatroner.rainbow-csv",
+	"redhat.java",
+	"redhat.vscode-yaml",
+	"streetsidesoftware.code-spell-checker",
+	"swiftlang.swift-vscode",
+	"tamasfe.even-better-toml",
+	"vadimcn.vscode-lldb",
+	"vscjava.vscode-gradle"
+]

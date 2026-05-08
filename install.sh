@@ -64,6 +64,8 @@ quiet gem install bundler clocale colorls fastlane cocoapods
 # bun
 printf "installing bun\n"
 quiet curl -fsSL https://bun.sh/install | bash
+# global bun/node packages
+bun install -g oh-my-claude-sisyphus @biomejs/biome eas-cli
 
 # stow configs
 stow .config git tmux zsh

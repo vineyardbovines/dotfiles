@@ -18,7 +18,7 @@ http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
 browser:
 # Whether to display labels using their RGB hex color codes in terminals that support truecolor. Supported values: enabled, disabled
-color_labels: disabled
+color_labels: enabled
 # Whether customizable, 4-bit accessible colors should be used. Supported values: enabled, disabled
 accessible_colors: disabled
 # Whether an accessible prompter should be used. Supported values: enabled, disabled

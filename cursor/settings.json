@@ -1,0 +1,54 @@
+{
+	"claudeCode.preferredLocation": "panel",
+
+	"crashReporting.enabled": "off",
+
+	"editor.colorDecorators": true,
+	"editor.cursorStyle": "line",
+	"editor.cursorBlinking": "phase",
+	"editor.detectIndentation": true,
+	"editor.fontSize": 14,
+	"editor.fontFamily": "'Hack Nerd Font', monospace",
+	"editor.formatOnSave": true,
+	"editor.insertSpaces": true,
+	"editor.linkedEditing": true,
+	"editor.tabSize": 2,
+
+	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false,
+
+	"javascript.autoClosingTags": true,
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"typescript.autoClosingTags": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+
+	"telemetry.enableTelemetry": false,
+	"telemetry.feedback.enabled": false,
+
+	"terminal.integrated.enableMultiLinePasteWarning": "never",
+
+	"window.zoomLevel": 0.5,
+
+	"workbench.agentsWindowButton.enabled": false,
+	"workbench.colorTheme": "Catppuccin Mocha",
+	"workbench.iconTheme": "catppuccin-mocha",
+	"workbench.preferredDarkColorTheme": "Catppuccin Mocha",
+	"workbench.preferredLightColorTheme": "Catppuccin Latte",
+	"workbench.startupEditor": "none",
+
+	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "yzhang.markdown-all-in-one"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	}
+}

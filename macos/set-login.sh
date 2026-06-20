@@ -3,11 +3,11 @@
 declare -a LOGIN_ITEMS=(
     "/Applications/1Password.app"
     "/Applications/Claude.app"
-    "/Applications/CleanShot X.app",
-    "/Applications/Expo Orbit.app",
-    "/Applications/noTunes.app",
-    "/Applications/Raycast.app",
-    "/Applications/Rectangle.app",
+    "/Applications/CleanShot X.app"
+    "/Applications/Expo Orbit.app"
+    "/Applications/noTunes.app"
+    "/Applications/Raycast.app"
+    "/Applications/Rectangle.app"
     "/Applications/Tailscale.app"
 )
 

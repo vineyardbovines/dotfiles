@@ -29,9 +29,10 @@ zplug load
 autoload -U compinit
 compinit
 
+source $HOME/zsh/exports.zsh
+source $HOME/zsh/alias.zsh
+
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
-
-source $HOME/zsh/exports.zsh
-source $HOME/zsh/alias.zsh
+eval "$(mise activate zsh)"

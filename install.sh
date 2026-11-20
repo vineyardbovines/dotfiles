@@ -1,88 +1,57 @@
 #!/bin/bash
 
-cd "$(dirname "$0")" || exit
+set -euo pipefail
 
-# helper function to suppress output with the exception of errors
-quiet() {
-    if ! "$@" > /dev/null 2>&1; then
-        printf "\033[31mSomething went wrong, see below\033[0m\n"
-        "$@"
-    fi
-}
+cd "$(dirname "$0")"
 
-# append a line to a file if it doesn't already exist
-append_once() {
-    grep -qxF "$1" "$2" 2>/dev/null || echo "$1" >> "$2"
-}
+export PATH="$HOME/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
-# get sudo password for the lifetime of the script
-printf "your password is required\n"
-sleep 1
-sudo -v
-while true; do
-    sudo -n true
-    sleep 60
-    kill -0 "$$" || exit
-done 2>/dev/null &
+# make dirs
+mkdir -p \
+    "$HOME/.local/bin" \
+    "$HOME/.config" \
+    "$HOME/dev" \
+    "$HOME/Desktop/screenshots/simulator"
 
 # xcode cli tools
-printf "installing xcode cli tools\n"
-quiet xcode-select --install
-
-# homebrew check
-if ! command -v "brew" &>/dev/null; then
-    printf "installing homebrew\n"
-    # install homebrew
-    quiet /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # set it in the terminal
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+if ! xcode-select -p >/dev/null 2>&1; then
+    printf "installing xcode cli tools\n"
+    xcode-select --install
+    exit 0
 fi
 
-# homebrew packages
-printf "installing homebrew packages\n"
-quiet brew bundle
+# install and setup mise
+if ! command -v mise >/dev/null 2>&1; then
+    installer="$(mktemp)"
+    curl -fsSL https://mise.run -o "$installer"
+    MISE_INSTALL_PATH="$HOME/.local/bin/mise" /bin/sh "$installer"
+    rm "$installer"
+fi
+mkdir -p "$HOME/.config/mise"
+cp .config/mise/config.toml "$HOME/.config/mise/config.toml"
 
-# app store apps
-printf "installing app store apps\n"
-APPSTORE_APPS=(
-    1037126344 # Apple Configurator
-    1450874784 # Transporter
-)
-for app in "${APPSTORE_APPS[@]}"; do
-    quiet mas install $app
-done
+# install packages
+mise bootstrap --only packages
 
-# xcode
-printf "setup xcode\n"
-quiet xcodes install --latest --select --no-superuser --experimental-unxip
+# link dotfiles
+stow --no-folding --ignore='^mise$' --target="$HOME/.config" .config
+stow --no-folding --target="$HOME" git tmux zsh
 
-# ruby
-printf "setup ruby\n"
-append_once "gem: --no-document" ~/.gemrc
-quiet gem install bundler clocale colorls fastlane cocoapods
+# finish xcode setup
+sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+sudo xcodebuild -runFirstLaunch
 
-# bun
-printf "installing bun\n"
-quiet curl -fsSL https://bun.sh/install | bash
-# global bun/node packages
-bun install -g oh-my-claude-sisyphus @biomejs/biome eas-cli
+# apply rest of mise config
+mise --cd "$HOME" bootstrap --skip packages,repos
 
-# stow configs
-stow .config git tmux zsh
+# zplug
+git clone https://github.com/zplug/zplug.git "$HOME/.zplug"
+zsh -ic 'zplug check || zplug install'
 
-# setup vim
-quiet nvim -E -s +PlugInstall +qall
+# neovim
+mise --cd "$HOME" exec -- nvim --headless '+PlugInstall --sync' +qa
 
-# setup macos
-./macos/set-defaults.sh
-./macos/set-login.sh
+# reload
+exec zsh -l
 
-# setup directories
-mkdir -p ~/dev ~/Desktop/screenshots
-# setup claude
-touch ~/dev/.envrc
-append_once "export CLAUDE_CONFIG_DIR=\"$HOME/dev/.claude\"" ~/dev/.envrc
-cp -rn .claude ~/dev/.claude
-
-# setup zsh
-source ~/.zshrc
+printf "done\n"

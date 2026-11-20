@@ -1,0 +1,161 @@
+[dotfiles]
+"~/.zshrc" = { mode = "track" }
+"~/.zshenv/local-bin" = { line = 'export PATH="$HOME/.local/bin:$PATH"' }
+
+[bootstrap.repos]
+"~/dotfiles" = { url = "git@github.com:vineyardbovines/dotfiles.git" }
+
+[bootstrap.services.mise-history]
+builtin = "history-watch"
+
+[bootstrap.packages]
+"brew:aria2" = "latest"
+"brew:bat" = "latest"
+"brew:binutils" = "latest"
+"brew:ccat" = "latest"
+"brew:coreutils" = "latest"
+"brew:diffutils" = "latest"
+"brew:direnv" = "latest"
+"brew:ffmpeg" = "latest"
+"brew:findutils" = "latest"
+"brew:fzf" = "latest"
+"brew:gawk" = "latest"
+"brew:gh" = "latest"
+"brew:git" = "latest"
+"brew:git-lfs" = "latest"
+"brew:gnu-sed" = "latest"
+"brew:gnu-tar" = "latest"
+"brew:gnu-time" = "latest"
+"brew:gnu-which" = "latest"
+"brew:gnupg" = "latest"
+"brew:graphviz" = "latest"
+"brew:grep" = "latest"
+"brew:gzip" = "latest"
+"brew:herdr" = "latest"
+"brew:facebook/fb/idb-companion" = "latest"
+"brew:jq" = "latest"
+"brew:less" = "latest"
+"brew:mas" = "latest"
+"brew:moreutils" = "latest"
+"brew:neovim" = "latest"
+"brew:opencode" = "latest"
+"brew:openssh" = "latest"
+"brew:rename" = "latest"
+"brew:ripgrep" = "latest"
+"brew:rsync" = "latest"
+"brew:starship" = "latest"
+"brew:stow" = "latest"
+"brew:telnet" = "latest"
+"brew:tmux" = { os = "macos" , version = "latest" }
+"brew:tree" = "latest"
+"brew:unzip" = "latest"
+"brew:watchman" = "latest"
+"brew:wget" = "latest"
+"brew:xcodesorg/made/xcodes" = "latest"
+"brew:zoxide" = "latest"
+"brew:zplug" = "latest"
+"brew-cask:1password" = "latest"
+"brew-cask:arc" = "latest"
+"brew-cask:android-cli" = "latest"
+"brew-cask:cleanshot" = "latest"
+"brew-cask:cmux" = "latest"
+"brew-cask:cursor" = "latest"
+"brew-cask:expo-orbit" = "latest"
+"brew-cask:font-hack" = "latest"
+"brew-cask:font-hack-nerd-font" = "latest"
+"brew-cask:google-chrome" = "latest"
+"brew-cask:raycast" = "latest"
+"brew-cask:rectangle" = "latest"
+"brew-cask:sf-symbols" = "latest"
+"brew-cask:slack" = "latest"
+"brew-cask:spotify" = "latest"
+"brew-cask:tailscale-app" = "latest"
+"brew-cask:the-unarchiver" = "latest"
+"brew-cask:transmission" = "latest"
+"mas:497799835" = "latest" # Xcode
+"mas:1037126344" = "latest" # Apple Configurator
+"mas:1450874784" = "latest" # Transporter
+
+[bootstrap.brew.taps]
+"facebook/fb" = "https://github.com/facebook/homebrew-fb.git"
+
+[bootstrap.settings.macos.login_items]
+apps = ["/Applications/1Password.app", "/Applications/CleanShot X.app", "/Applications/Expo Orbit.app", "/Applications/Raycast.app", "/Applications/Rectangle.app", "/Applications/Tailscale.app"]
+
+[bootstrap.settings.macos.dock]
+apps = ["/Applications/Messages.app", "/Applications/Arc.app", "/Applications/cmux.app", "/Applications/Cursor.app", "/Applications/Tailscale.app", "/Applications/Slack.app"]
+autohide = true
+autohide_delay = 0
+autohide_time_modifier = 0
+tilesize = 79
+magnification = false
+show_recents = false
+[bootstrap.settings.macos.defaults."com.apple.dock"]
+mineffect = "scale"
+minimize-to-application = true
+launchanim = false
+show-process-indicators = true
+showhidden = true
+expose-group-by-app = false
+
+[bootstrap.settings.macos.finder]
+sort_folders_first = true
+save_new_documents_to_cloud = false
+show_all_files = true
+show_pathbar = true
+show_status_bar = true
+show_extensions_warning = false
+preferred_view_style = "list"
+[bootstrap.settings.macos.defaults."com.apple.finder"]
+FXDefaultSearchScope = "SCcf"
+NewWindowTarget = "PfDe"
+CreateDesktop = false
+
+[bootstrap.settings.macos.keyboard]
+automatic_capitalization = false
+automatic_spelling_correction = false
+key_repeat = 2
+initial_key_repeat = 15
+press_and_hold = false
+
+[bootstrap.settings.macos.trackpad]
+tap_to_click = true
+three_finger_drag = true
+
+[bootstrap.settings.macos.defaults.NSGlobalDomain]
+AppleShowAllExtensions = true
+AppleShowScrollBars = "WhenScrolling"
+NSAutomaticDashSubstitutionEnabled = false
+NSAutomaticPeriodSubstitutionEnabled = false
+NSAutomaticQuoteSubstitutionEnabled = false
+NSNavPanelExpandedStateForSaveMode = true
+NSNavPanelExpandedStateForSaveMode2 = true
+
+[bootstrap.settings.macos.defaults."com.apple.desktopservices"]
+DSDontWriteNetworkStores = true
+DSDontWriteUSBStores = true
+
+[bootstrap.settings.macos.defaults."com.apple.screencapture"]
+type = "png"
+
+[bootstrap.mise_shell_activate]
+zsh = true
+
+[bootstrap.settings.macos.defaults."com.apple.WindowManager"]
+GloballyEnabled = false
+EnableStandardClickToShowDesktop = false
+EnableTiledWindowMargins = false
+EnableTilingByEdgeDrag = false
+EnableTilingOptionAccelerator = false
+EnableTopTilingByEdgeDrag = false
+
+[tools]
+node = "26"
+bun = "latest"
+pnpm = "latest"
+go = "latest"
+protoc = "latest"
+ruby = "3.4"
+python = "3.14"
+java = "temurin-17"
+rust = "stable"
